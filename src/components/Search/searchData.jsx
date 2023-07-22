@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import styles from './searchData.module.css';
 import { getSearchData } from '../../api/searchData';
+import { useContext } from 'react';
+import { ThemeContext } from '../../Hooks/themeContext';
 
 const Search = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+
+  const { theme, setTheme } = useContext(ThemeContext);
 
   const submitForm = (event) => {
     event.preventDefault();
@@ -19,7 +23,13 @@ const Search = () => {
   };
   return (
     <form onSubmit={submitForm} id='searchData'>
-      <div className={styles.container}>
+      <div
+        className={styles.container}
+        style={{
+          backgroundColor:
+            theme === 'dark' ? 'rgb(26,26,28)' : 'rgb(200,200,200)',
+        }}
+      >
         <div className={styles.heading}>Search</div>
 
         <div className={styles.inputContainer}>
